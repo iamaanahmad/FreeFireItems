@@ -372,7 +372,9 @@ If Arsenal helps you, consider:
 ## 📈 Analytics & Usage
 
 <div align="center">
+## Star History
 
+[![Star History Chart](https://api.star-history.com/svg?repos=iamaanahmad/FreeFireItems&type=date&legend=top-left)](https://www.star-history.com/#iamaanahmad/FreeFireItems&type=date&legend=top-left)
 <!-- [![GitHub Stats](https://github-readme-stats.vercel.app/api?username=iamaanahmad&show_icons=true&theme=dark&bg_color=0a0a0a&title_color=ff6b35&icon_color=ff6b35&text_color=ffffff)](https://github.com/iamaanahmad) -->
 
 [![Repository Stats](https://github-readme-stats.vercel.app/api/pin/?username=iamaanahmad&repo=FreeFireItems&theme=dark&bg_color=0a0a0a&title_color=ff6b35&icon_color=ff6b35&text_color=ffffff)](https://github.com/iamaanahmad/FreeFireItems)
