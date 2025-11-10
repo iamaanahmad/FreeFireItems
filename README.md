@@ -455,6 +455,6 @@ For legal matters, content removal requests, or official inquiries:
 
 ***Crafted with ❤️ by [@iamaanahmad](https://github.com/iamaanahmad) for the global Free Fire community***
 
-**Last Updated: July 2025 | Version: OB47+ | Items: 5,000+**
+**Last Updated: November 2025 | Version: OB50 | Items: 5,000+**
 
 </div>
