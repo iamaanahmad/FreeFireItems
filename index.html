@@ -177,7 +177,12 @@
         
         /* Base body styles */
         body {
-            background: var(--gradient-background);
+            background: #0a0a0a;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 107, 53, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(0, 122, 204, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 107, 53, 0.06) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(0, 122, 204, 0.04) 0px, transparent 50%);
             color: var(--text-color);
             font-family: var(--font-family);
             font-size: var(--font-size-base);
@@ -189,6 +194,20 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, transparent 0%, rgba(255, 107, 53, 0.02) 50%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Hide scrollbars while maintaining functionality */
@@ -298,18 +317,22 @@
             cursor: pointer;
             transition: all var(--transition-normal);
             border-radius: var(--radius-md);
-            color: var(--text-color);
+            color: var(--primary-orange);
             display: flex;
             align-items: center;
             justify-content: center;
             width: 42px;
             height: 42px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
         }
 
         .header-menu:hover {
-            background: var(--primary-orange-light);
+            background: rgba(255, 107, 53, 0.2);
             color: var(--primary-orange);
-            transform: scale(1.05);
+            transform: scale(1.08);
+            border-color: rgba(255, 107, 53, 0.4);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
         }
 
         .header.search-mode .header-menu {
@@ -343,29 +366,37 @@
 
         .search-textarea {
             width: 100%;
-            padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 45px;
-            border-radius: var(--radius-md);
-            border: 2px solid var(--card-border);
-            background: var(--card-background);
-            color: var(--text-color);
+            padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 50px;
+            border-radius: var(--radius-lg);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%);
+            color: #ffffff;
             font-family: var(--font-family);
             font-size: var(--font-size-base);
-            height: 48px;
+            height: 56px;
             resize: none;
             text-align: left;
             transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            line-height: 1.5;
         }
 
         .search-textarea::placeholder {
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 400;
+        }
+
+        .search-textarea:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
         }
 
         .search-textarea:focus {
             outline: none;
             border-color: var(--primary-orange);
-            box-shadow: 0 0 0 3px var(--primary-orange-light);
-            background: var(--background-secondary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2), 0 4px 20px rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 1) 0%, rgba(26, 26, 26, 1) 100%);
         }
 
         .search-icon {
@@ -373,13 +404,16 @@
             left: var(--spacing-md);
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: var(--font-size-base);
-            transition: color var(--transition-normal);
+            color: var(--primary-orange);
+            font-size: var(--font-size-lg);
+            transition: all var(--transition-normal);
+            opacity: 0.8;
         }
 
         .search-textarea:focus + .search-icon {
             color: var(--primary-orange);
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
         }
 
         /* Enhanced Filters */
@@ -397,10 +431,11 @@
 
         .filter-select {
             padding: var(--spacing-sm) var(--spacing-md);
+            padding-right: 36px;
             border-radius: var(--radius-md);
-            border: 2px solid var(--card-border);
-            background: var(--card-background);
-            color: var(--text-color);
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%);
+            color: #ffffff;
             font-size: var(--font-size-sm);
             font-weight: 500;
             cursor: pointer;
@@ -410,17 +445,44 @@
             font-family: var(--font-family);
             flex: 1;
             transition: all var(--transition-normal);
-            height: 40px;
+            height: 44px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6b35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+
+        .filter-select option {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 12px;
+            font-weight: 500;
         }
 
         .filter-select:hover {
-            border-color: var(--primary-orange);
-            background: var(--background-secondary);
+            border-color: rgba(255, 107, 53, 0.5);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6b35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
         }
 
         .filter-select:focus {
             border-color: var(--primary-orange);
-            box-shadow: 0 0 0 3px var(--primary-orange-light);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 1) 0%, rgba(26, 26, 26, 1) 100%);
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6b35' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
         }
 
         /* Enhanced Container and Grid */
@@ -430,20 +492,23 @@
             margin: 0 auto;
             width: 100%;
             transition: transform var(--transition-normal);
+            position: relative;
+            z-index: 1;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: var(--spacing-md);
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: var(--spacing-lg);
             width: 100%;
+            padding: var(--spacing-md);
         }
 
         /* Beautiful Icon Cards with Enhanced Hover Effects */
         .icon-card {
-            background: var(--card-background);
+            background: linear-gradient(135deg, var(--card-background) 0%, rgba(26, 26, 26, 0.8) 100%);
             padding: var(--spacing-md);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             text-align: center;
             user-select: none;
             cursor: pointer;
@@ -453,9 +518,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 110px;
+            height: 130px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .icon-card::before {
@@ -471,45 +538,84 @@
             z-index: 0;
         }
 
+        .icon-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            z-index: 0;
+        }
+
         .icon-card:hover {
             border-color: var(--primary-orange);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: var(--shadow-glow);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.4), 0 0 0 1px rgba(255, 107, 53, 0.2);
         }
 
         .icon-card:hover::before {
-            opacity: 0.1;
+            opacity: 0.15;
+        }
+
+        .icon-card:hover::after {
+            opacity: 1;
         }
 
         .icon-card:active {
-            transform: translateY(-2px) scale(0.98);
+            transform: translateY(-4px) scale(1.02);
         }
 
         .icon-card img {
-            width: 70px;
-            height: 70px;
-            border-radius: var(--radius-sm);
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-md);
             animation: iconLoad var(--transition-slow) ease-out;
             pointer-events: none;
             object-fit: contain;
             position: relative;
             z-index: 1;
-            transition: transform var(--transition-normal);
+            transition: all var(--transition-normal);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .icon-card:hover img {
-            transform: scale(1.1);
+            transform: scale(1.15) rotateY(5deg);
+            filter: drop-shadow(0 8px 16px rgba(255, 107, 53, 0.4));
         }
 
         @keyframes iconLoad {
             from { 
                 opacity: 0; 
-                transform: scale(0.8) rotateY(90deg); 
+                transform: scale(0.7) translateY(20px); 
             }
             to { 
                 opacity: 1; 
-                transform: scale(1) rotateY(0deg); 
+                transform: scale(1) translateY(0); 
             }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .icon-card.loading {
+            background: linear-gradient(
+                90deg,
+                rgba(26, 26, 26, 0.8) 0%,
+                rgba(255, 107, 53, 0.1) 50%,
+                rgba(26, 26, 26, 0.8) 100%
+            );
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
         }
 
         /* Enhanced Pagination */
@@ -524,20 +630,22 @@
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
-            background: var(--card-background);
-            border: 2px solid var(--card-border);
-            padding: var(--spacing-sm);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            padding: var(--spacing-md);
             border-radius: var(--radius-xl);
             max-width: 100%;
             user-select: none;
             scrollbar-width: thin;
-            box-shadow: var(--shadow-medium);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .pagination button {
             padding: var(--spacing-sm) var(--spacing-md);
             margin: 2px;
-            border: none;
+            border: 1px solid transparent;
             background: transparent;
             color: var(--text-color);
             cursor: pointer;
@@ -546,28 +654,30 @@
             font-weight: 500;
             transition: all var(--transition-normal);
             font-family: var(--font-family);
-            min-width: 40px;
-            height: 36px;
+            min-width: 44px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .pagination button:hover {
-            background: var(--primary-orange-light);
+            background: rgba(255, 107, 53, 0.15);
             color: var(--primary-orange);
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            border-color: rgba(255, 107, 53, 0.3);
         }
 
         .pagination button.active {
             background: var(--gradient-primary);
             color: var(--button-active-text);
             font-weight: 600;
-            box-shadow: var(--shadow-small);
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
+            border-color: var(--primary-orange);
         }
 
         .pagination button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none;
         }
@@ -580,9 +690,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--modal-background);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
             z-index: 1000;
             overflow: hidden;
             touch-action: none;
@@ -592,7 +702,7 @@
             display: flex !important;
             align-items: center;
             justify-content: center;
-            animation: modalFadeIn var(--transition-normal) ease-out;
+            animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Share modal specific styles */
@@ -625,22 +735,24 @@
         }
 
         .modal-content {
-            background: var(--modal-content-background);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(17, 17, 17, 0.98) 100%);
             padding: var(--spacing-2xl);
             border-radius: var(--radius-xl);
             text-align: left;
-            border: 2px solid var(--card-border);
+            border: 2px solid rgba(255, 107, 53, 0.3);
             color: var(--text-color);
             max-width: 90%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             z-index: 1001;
-            width: 400px;
+            width: 450px;
             opacity: 0;
-            transform: scale(0.9) translateY(20px);
-            transition: all var(--transition-normal);
-            box-shadow: var(--shadow-large);
+            transform: scale(0.85) translateY(40px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 107, 53, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .modal.show .modal-content {
@@ -663,11 +775,11 @@
 
         .modal-close-btn {
             position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 32px;
-            height: 32px;
-            background: var(--primary-orange);
+            top: -12px;
+            right: -12px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff8a65 100%);
             color: white;
             border: none;
             border-radius: 50%;
@@ -675,26 +787,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             transition: all var(--transition-normal);
             z-index: 1002;
-            box-shadow: var(--shadow-medium);
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.5);
         }
 
         .modal-close-btn:hover {
-            background: var(--primary-orange-hover);
-            transform: scale(1.1);
-            box-shadow: var(--shadow-glow);
+            background: linear-gradient(135deg, var(--primary-orange-hover) 0%, #e55a2b 100%);
+            transform: scale(1.15) rotate(90deg);
+            box-shadow: 0 6px 24px rgba(255, 107, 53, 0.7);
         }
 
         .modal-share-btn {
             position: absolute;
-            top: -10px;
-            right: 30px;
-            width: 32px;
-            height: 32px;
-            background: var(--accent-blue);
+            top: -12px;
+            right: 32px;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0099ff 100%);
             color: white;
             border: none;
             border-radius: 50%;
@@ -705,17 +817,17 @@
             font-size: 14px;
             transition: all var(--transition-normal);
             z-index: 1002;
-            box-shadow: var(--shadow-medium);
+            box-shadow: 0 4px 16px rgba(0, 122, 204, 0.5);
         }
 
         .modal-share-btn:hover {
-            background: var(--accent-blue-hover);
-            transform: scale(1.1);
-            box-shadow: var(--shadow-glow);
+            background: linear-gradient(135deg, var(--accent-blue-hover) 0%, #0077cc 100%);
+            transform: scale(1.15) rotate(-10deg);
+            box-shadow: 0 6px 24px rgba(0, 122, 204, 0.7);
         }
 
         .modal-share-btn:active {
-            transform: scale(0.95);
+            transform: scale(1.05) rotate(-5deg);
         }
 
         .modal-image-container {
@@ -724,25 +836,37 @@
         }
 
         .modal img {
-            width: 120px;
-            height: 120px;
-            border-radius: var(--radius-md);
+            width: 140px;
+            height: 140px;
+            border-radius: var(--radius-lg);
             user-select: none;
             object-fit: contain;
-            border: 2px solid var(--card-border);
-            box-shadow: var(--shadow-medium);
-            background: var(--background-secondary);
+            border: 3px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 53, 0.2);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            padding: var(--spacing-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .modal img:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.4);
         }
 
         .modal-title {
             font-size: var(--font-size-xl);
             font-weight: 700;
             margin: 0 0 var(--spacing-sm) 0;
-            color: var(--primary-orange);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             word-wrap: break-word;
             overflow-wrap: break-word;
             hyphens: auto;
-            line-height: 1.3;
+            line-height: 1.4;
+            text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
         }
 
         .modal-subtitle {
@@ -755,11 +879,18 @@
         }
 
         .modal-section {
-            background: var(--background-secondary);
-            padding: var(--spacing-md);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            padding: var(--spacing-lg);
             border-radius: var(--radius-md);
             margin: var(--spacing-md) 0;
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all var(--transition-normal);
+        }
+
+        .modal-section:hover {
+            border-color: rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.9) 0%, rgba(26, 26, 26, 0.7) 100%);
+            transform: translateX(4px);
         }
 
         .modal-section h4 {
@@ -796,26 +927,88 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 24px;
-            height: 24px;
+            width: 60px;
+            height: 60px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-dot::before {
+            content: '';
+            width: 40px;
+            height: 40px;
             background: var(--gradient-primary);
             border-radius: 50%;
             animation: pulseGlow 1.5s infinite ease-in-out;
-            z-index: 9999;
-            box-shadow: var(--shadow-glow);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .loading-dot::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top-color: var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes pulseGlow {
             0%, 100% { 
-                opacity: 0.4; 
-                transform: translate(-50%, -50%) scale(0.8); 
-                box-shadow: 0 0 0 0 var(--primary-orange);
+                opacity: 0.6; 
+                transform: scale(0.8); 
             }
             50% { 
                 opacity: 1; 
-                transform: translate(-50%, -50%) scale(1.2); 
-                box-shadow: 0 0 0 10px transparent;
+                transform: scale(1.1); 
             }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Search Experience Enhancements */
+        .main-search-input:focus {
+            border-color: var(--primary-orange) !important;
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2), 0 4px 20px rgba(255, 107, 53, 0.3) !important;
+            background: linear-gradient(135deg, rgba(17, 17, 17, 1) 0%, rgba(26, 26, 26, 1) 100%) !important;
+        }
+
+        .main-search-input:hover {
+            border-color: rgba(255, 107, 53, 0.5) !important;
+            background: linear-gradient(135deg, rgba(17, 17, 17, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%) !important;
+        }
+
+        .main-search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        /* Results info styling */
+        #results-info {
+            font-weight: 500;
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        #results-info:empty {
+            display: none;
+        }
+
+        /* Clear search button styling */
+        #clear-main-search:hover {
+            background: rgba(255, 107, 53, 0.3) !important;
+            transform: translateY(-50%) scale(1.1) !important;
+        }
+
+        #clear-main-search:active {
+            transform: translateY(-50%) scale(0.95) !important;
         }
 
         @keyframes slideUp {
@@ -852,14 +1045,19 @@
             color: var(--text-secondary);
             font-size: var(--font-size-lg);
             font-weight: 500;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.5) 0%, rgba(17, 17, 17, 0.5) 100%);
+            border-radius: var(--radius-lg);
+            border: 2px dashed rgba(255, 107, 53, 0.2);
+            margin: var(--spacing-xl) 0;
         }
 
         .no-results::before {
             content: '🔍';
             display: block;
-            font-size: 48px;
+            font-size: 64px;
             margin-bottom: var(--spacing-md);
-            opacity: 0.5;
+            opacity: 0.6;
+            animation: pulseGlow 2s infinite ease-in-out;
         }
 
         /* Footer Styles */
@@ -1007,37 +1205,46 @@
             }
             
             .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
-                gap: var(--spacing-sm);
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: var(--spacing-md);
+                padding: var(--spacing-xs);
             }
             
             .icon-card {
-                height: 95px;
+                height: 120px;
                 padding: var(--spacing-sm);
             }
             
             .icon-card img {
-                width: 60px;
-                height: 60px;
+                width: 75px;
+                height: 75px;
             }
             
             .modal-content {
                 width: 95%;
-                padding: var(--spacing-lg);
+                padding: var(--spacing-xl);
                 max-height: 85vh;
             }
             
             .modal-close-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 14px;
-                top: -8px;
-                right: -8px;
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+                top: -10px;
+                right: -10px;
+            }
+
+            .modal-share-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 13px;
+                top: -10px;
+                right: 28px;
             }
             
             .modal img {
-                width: 100px;
-                height: 100px;
+                width: 120px;
+                height: 120px;
             }
             
             .modal-title {
@@ -1175,16 +1382,19 @@
             }
             
             .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+                gap: var(--spacing-sm);
+                padding: 0;
             }
             
             .icon-card {
-                height: 85px;
+                height: 110px;
+                padding: var(--spacing-xs);
             }
             
             .icon-card img {
-                width: 50px;
-                height: 50px;
+                width: 65px;
+                height: 65px;
             }
             
             .header-title {
@@ -1192,7 +1402,13 @@
             }
             
             .modal-content {
-                padding: var(--spacing-md);
+                padding: var(--spacing-lg);
+                width: 95%;
+            }
+            
+            .modal img {
+                width: 120px;
+                height: 120px;
             }
         }
 
@@ -1343,31 +1559,39 @@
                         placeholder="Search by item name, ID, description, or rarity..." 
                         aria-describedby="main-search-help"
                         rows="1"
-                        style="width: 100%; padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 50px; border-radius: var(--radius-md); border: 2px solid var(--card-border); background: var(--background-secondary); color: var(--text-color); font-family: var(--font-family); font-size: var(--font-size-base); height: 56px; resize: none; transition: all var(--transition-normal);"
+                        style="width: 100%; padding: var(--spacing-md) 50px var(--spacing-md) 50px; border-radius: var(--radius-lg); border: 2px solid rgba(255, 107, 53, 0.3); background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%); color: #ffffff; font-family: var(--font-family); font-size: var(--font-size-base); height: 56px; resize: none; transition: all var(--transition-normal); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); line-height: 1.5;"
                     ></textarea>
-                    <i class="fas fa-search" style="position: absolute; left: var(--spacing-md); top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: var(--font-size-lg);" aria-hidden="true"></i>
+                    <i class="fas fa-search" style="position: absolute; left: var(--spacing-md); top: 50%; transform: translateY(-50%); color: var(--primary-orange); font-size: var(--font-size-lg); opacity: 0.8; transition: all var(--transition-normal);" aria-hidden="true"></i>
+                    <button 
+                        id="clear-main-search" 
+                        onclick="clearMainSearch()" 
+                        style="position: absolute; right: var(--spacing-md); top: 50%; transform: translateY(-50%); background: rgba(255, 107, 53, 0.2); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; color: var(--primary-orange); font-size: 14px; display: none; transition: all var(--transition-normal); align-items: center; justify-content: center;"
+                        aria-label="Clear search"
+                    >
+                        <i class="fas fa-times"></i>
+                    </button>
                     <div id="main-search-help" class="sr-only">Type to search through Free Fire items database</div>
                 </div>
                 
                 <!-- Filters Row -->
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);">
                     <div>
-                        <label for="main-filter-Rare" style="display: block; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-xs);">Rarity</label>
-                        <select id="main-filter-Rare" style="width: 100%; padding: var(--spacing-md); border-radius: var(--radius-md); border: 2px solid var(--card-border); background: var(--background-secondary); color: var(--text-color); font-size: var(--font-size-base); font-weight: 500; cursor: pointer; outline: none; height: 48px; font-family: var(--font-family); transition: all var(--transition-normal);" aria-label="Filter by rarity">
+                        <label for="main-filter-Rare" style="display: block; color: rgba(255, 255, 255, 0.7); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-xs);">Rarity</label>
+                        <select id="main-filter-Rare" class="filter-select" aria-label="Filter by rarity">
                             <option value="">All Rarities</option>
                         </select>
                     </div>
                     
                     <div>
-                        <label for="main-filter-itemType" style="display: block; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-xs);">Item Type</label>
-                        <select id="main-filter-itemType" style="width: 100%; padding: var(--spacing-md); border-radius: var(--radius-md); border: 2px solid var(--card-border); background: var(--background-secondary); color: var(--text-color); font-size: var(--font-size-base); font-weight: 500; cursor: pointer; outline: none; height: 48px; font-family: var(--font-family); transition: all var(--transition-normal);" aria-label="Filter by item type">
+                        <label for="main-filter-itemType" style="display: block; color: rgba(255, 255, 255, 0.7); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-xs);">Item Type</label>
+                        <select id="main-filter-itemType" class="filter-select" aria-label="Filter by item type">
                             <option value="">All Types</option>
                         </select>
                     </div>
                     
                     <div>
-                        <label for="main-filter-collectionType" style="display: block; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-xs);">Collection</label>
-                        <select id="main-filter-collectionType" style="width: 100%; padding: var(--spacing-md); border-radius: var(--radius-md); border: 2px solid var(--card-border); background: var(--background-secondary); color: var(--text-color); font-size: var(--font-size-base); font-weight: 500; cursor: pointer; outline: none; height: 48px; font-family: var(--font-family); transition: all var(--transition-normal);" aria-label="Filter by collection">
+                        <label for="main-filter-collectionType" style="display: block; color: rgba(255, 255, 255, 0.7); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-xs);">Collection</label>
+                        <select id="main-filter-collectionType" class="filter-select" aria-label="Filter by collection">
                             <option value="">All Collections</option>
                         </select>
                     </div>
@@ -1397,7 +1621,7 @@
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-6409311049525505"
-                     data-ad-slot="7317445135"
+                     data-ad-slot="4452408958"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
             </div>
@@ -1580,27 +1804,10 @@
     <script>
         // Initialize AdSense ads after page load
         window.addEventListener('load', function() {
+            // Wait for AdSense script to load
             setTimeout(() => {
-                // Initialize header ad
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {
-                    console.log('AdSense header ad initialization failed');
-                }
-                
-                // Initialize mid-content ad after items are loaded
-                setTimeout(() => {
-                    const midContentAd = document.getElementById('midContentAd');
-                    if (midContentAd && filteredData.length > 50) {
-                        midContentAd.style.display = 'block';
-                        try {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        } catch (e) {
-                            console.log('AdSense mid-content ad initialization failed');
-                        }
-                    }
-                }, 2000);
-            }, 1000);
+                initializeAllAds();
+            }, 1500);
         });
     </script>      
     <script>
@@ -1665,6 +1872,9 @@
                 mainSearch.value = '';
             }
             
+            // Hide clear buttons
+            updateClearButtons();
+            
             // Clear any pending timeouts
             if (searchTimeout) {
                 clearTimeout(searchTimeout);
@@ -1672,6 +1882,55 @@
             
             // Apply filters immediately
             applyFilters();
+        }
+
+        function clearMainSearch() {
+            const mainSearch = document.getElementById("main-search");
+            const headerSearch = document.getElementById("search");
+            
+            if (mainSearch) {
+                mainSearch.value = '';
+                mainSearch.focus();
+            }
+            if (headerSearch) {
+                headerSearch.value = '';
+            }
+            
+            updateClearButtons();
+            applyFilters();
+        }
+
+        function updateClearButtons() {
+            const mainSearch = document.getElementById("main-search");
+            const clearBtn = document.getElementById("clear-main-search");
+            
+            if (clearBtn && mainSearch) {
+                if (mainSearch.value.trim().length > 0) {
+                    clearBtn.style.display = 'flex';
+                } else {
+                    clearBtn.style.display = 'none';
+                }
+            }
+        }
+
+        function syncFilters(changedId, value) {
+            // Sync between header and main filters
+            const filterMap = {
+                'filter-Rare': 'main-filter-Rare',
+                'main-filter-Rare': 'filter-Rare',
+                'filter-itemType': 'main-filter-itemType',
+                'main-filter-itemType': 'filter-itemType',
+                'filter-collectionType': 'main-filter-collectionType',
+                'main-filter-collectionType': 'filter-collectionType'
+            };
+            
+            const syncId = filterMap[changedId];
+            if (syncId) {
+                const syncElement = document.getElementById(syncId);
+                if (syncElement) {
+                    syncElement.value = value;
+                }
+            }
         }
 
         // Enhanced DOM ready with better loading experience
@@ -1738,7 +1997,11 @@
             ["filter-Rare", "filter-itemType", "filter-collectionType", "main-filter-Rare", "main-filter-itemType", "main-filter-collectionType"].forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
-                    element.addEventListener("change", debouncedApplyFilters);
+                    element.addEventListener("change", (e) => {
+                        // Sync filters between header and main section
+                        syncFilters(id, e.target.value);
+                        debouncedApplyFilters();
+                    });
                 }
             });
             
@@ -1770,6 +2033,9 @@
             
             if (mainSearch) {
                 mainSearch.addEventListener("input", (e) => {
+                    // Update clear button visibility
+                    updateClearButtons();
+                    
                     // Clear timeout to prevent previous calls
                     if (searchTimeout) {
                         clearTimeout(searchTimeout);
@@ -1786,6 +2052,9 @@
                             clearTimeout(searchTimeout);
                         }
                         applyFilters(); // Immediate search on Enter
+                    }
+                    if (e.key === 'Escape') {
+                        clearMainSearch();
                     }
                 });
             }
@@ -2006,12 +2275,43 @@
             currentPage = 0;
             renderIcons();
             
+            // Update results info
+            updateResultsInfo(searchQuery, itemTypeFilter, collectionTypeFilter, rareFilter);
+            
             // Update URL with search query for sharing
             updateURL(searchQuery);
             
             // Analytics tracking (you can implement your analytics here)
             if (searchQuery) {
                 console.log(`Search performed: "${searchQuery}" - ${filteredData.length} results`);
+            }
+        }
+
+        function updateResultsInfo(searchQuery, itemTypeFilter, collectionTypeFilter, rareFilter) {
+            const resultsInfo = document.getElementById('results-info');
+            if (!resultsInfo) return;
+            
+            const totalItems = iconsData.length;
+            const filteredCount = filteredData.length;
+            const hasFilters = searchQuery || itemTypeFilter || collectionTypeFilter || rareFilter;
+            
+            if (hasFilters) {
+                let filterText = [];
+                if (searchQuery) filterText.push(`"${searchQuery}"`);
+                if (rareFilter) filterText.push(rareFilter);
+                if (itemTypeFilter) filterText.push(itemTypeFilter);
+                if (collectionTypeFilter) filterText.push(collectionTypeFilter);
+                
+                resultsInfo.innerHTML = `
+                    <span style="color: var(--primary-orange); font-weight: 600;">${filteredCount}</span> 
+                    ${filteredCount === 1 ? 'item' : 'items'} found
+                    ${filterText.length > 0 ? ` for ${filterText.join(', ')}` : ''}
+                    <span style="opacity: 0.7; margin-left: 8px;">(${totalItems} total)</span>
+                `;
+            } else {
+                resultsInfo.innerHTML = `
+                    Showing all <span style="color: var(--primary-orange); font-weight: 600;">${totalItems}</span> items
+                `;
             }
         }
 
@@ -2099,6 +2399,11 @@
                 card.setAttribute('role', 'button');
                 card.setAttribute('tabindex', '0');
                 card.setAttribute('aria-label', `View details for ${icon.name}`);
+                
+                // Add staggered animation delay
+                card.style.animationDelay = `${index * 0.03}s`;
+                card.style.opacity = '0';
+                card.style.animation = 'iconLoad 0.5s ease-out forwards';
                 
                 card.onclick = (e) => {
                     lastClickedCard = card;
@@ -2504,15 +2809,36 @@
             // Track content engagement for ad optimization
             trackContentEngagement();
             
-            setTimeout(() => {
-                if (window.performance) {
-                    const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-                    console.log(`Page load time: ${loadTime}ms`);
-                }
-                // Initialize all ads
-                initializeAllAds();
-            }, 0);
+            // Log performance
+            if (window.performance) {
+                const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+                console.log(`Page load time: ${loadTime}ms`);
+            }
+            
+            // Check if AdSense script is loaded
+            checkAdSenseLoaded();
         });
+
+        function checkAdSenseLoaded() {
+            let attempts = 0;
+            const maxAttempts = 20;
+            
+            const checkInterval = setInterval(() => {
+                attempts++;
+                
+                if (typeof adsbygoogle !== 'undefined' || window.adsbygoogle) {
+                    clearInterval(checkInterval);
+                    console.log('AdSense script loaded successfully');
+                    // Initialize ads after a short delay
+                    setTimeout(() => {
+                        initializeAllAds();
+                    }, 500);
+                } else if (attempts >= maxAttempts) {
+                    clearInterval(checkInterval);
+                    console.warn('AdSense script failed to load after ' + (maxAttempts * 100) + 'ms');
+                }
+            }, 100);
+        }
 
         // Content engagement tracking for better ad targeting
         function trackContentEngagement() {
@@ -2539,6 +2865,11 @@
         }
 
         function showEngagementAd() {
+            // Check if already shown
+            if (document.querySelector('.engagement-ad-shown')) {
+                return;
+            }
+            
             const adContainer = document.createElement('div');
             adContainer.className = 'ad-container engagement-ad-shown';
             adContainer.style.cssText = `
@@ -2552,22 +2883,30 @@
             `;
             adContainer.innerHTML = `
                 <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-6409311049525505"
-     data-ad-slot="5707276100"></ins>
+                     style="display:block"
+                     data-ad-format="autorelaxed"
+                     data-ad-client="ca-pub-6409311049525505"
+                     data-ad-slot="5707276100"></ins>
             `;
             
             const container = document.querySelector('.container');
             if (container) {
                 container.appendChild(adContainer);
-                if (window.adsbygoogle) {
-                    window.adsbygoogle.push({});
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    console.log('Engagement ad initialized');
+                } catch (e) {
+                    console.error('Failed to initialize engagement ad:', e);
                 }
             }
         }
 
         function addEngagedUserAd() {
+            // Check if already shown
+            if (document.querySelector('.engaged-user-ad')) {
+                return;
+            }
+            
             const adContainer = document.createElement('div');
             adContainer.className = 'ad-container engaged-user-ad';
             adContainer.style.cssText = `
@@ -2584,34 +2923,49 @@
                 max-width: 320px;
             `;
             adContainer.innerHTML = `
-                <button onclick="this.parentElement.style.display='none'" style="position: absolute; top: 5px; right: 5px; background: var(--primary-orange); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-size: 12px;">×</button>
+                <button onclick="this.parentElement.remove()" style="position: absolute; top: 5px; right: 5px; background: var(--primary-orange); color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;">×</button>
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-6409311049525505"
-                     data-ad-slot="7317445135"
+                     data-ad-slot="5707276100"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
             `;
             
             document.body.appendChild(adContainer);
-            if (window.adsbygoogle) {
-                window.adsbygoogle.push({});
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                console.log('Engaged user ad initialized');
+            } catch (e) {
+                console.error('Failed to initialize engaged user ad:', e);
             }
         }
 
         function initializeAllAds() {
             // Initialize all AdSense ads
-            if (window.adsbygoogle) {
-                // Push all ad units
-                const adElements = document.querySelectorAll('.adsbygoogle');
-                adElements.forEach(() => {
-                    try {
-                        window.adsbygoogle.push({});
-                    } catch (e) {
-                        console.log('AdSense initialization skipped');
-                    }
-                });
+            const adElements = document.querySelectorAll('.adsbygoogle');
+            
+            if (adElements.length === 0) {
+                console.log('No AdSense ad units found');
+                return;
             }
+            
+            console.log(`Initializing ${adElements.length} AdSense ad units`);
+            
+            adElements.forEach((adElement, index) => {
+                // Check if ad is already initialized
+                if (adElement.getAttribute('data-adsbygoogle-status')) {
+                    console.log(`Ad ${index + 1} already initialized`);
+                    return;
+                }
+                
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    console.log(`Ad ${index + 1} initialized successfully`);
+                } catch (e) {
+                    console.error(`Failed to initialize ad ${index + 1}:`, e);
+                }
+            });
         }
 
         // Add some utility functions for future enhancements
