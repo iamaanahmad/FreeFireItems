@@ -5,7 +5,7 @@ import { RawItemData, ProcessedItem } from "@/types";
 import { Search, Info, X, ChevronLeft, ChevronRight, Share2, Filter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ITEMS_PER_PAGE = 100;
+const ITEMS_PER_PAGE = 48;
 const API_ENDPOINT = "https://raw.githubusercontent.com/starexxx/FFItems/74c2af66d691776c2452bd72ca0388ba52d7c5fb/assets/itemData.json";
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || "https://raw.githubusercontent.com/starexxx/FFItems/main/assets/icons";
 
@@ -101,6 +101,11 @@ export default function ItemExplorer() {
         setPage(0);
     }, [search, rarity, itemType, collection]);
 
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     if (loading) {
         return (
             <div className="flex h-64 items-center justify-center">
@@ -192,7 +197,7 @@ export default function ItemExplorer() {
                 <div className="flex justify-center mt-12 gap-2 overflow-x-auto p-4 bg-card-bg/50 glass-panel rounded-full shadow-medium max-w-fit mx-auto">
                     <button
                         disabled={page === 0}
-                        onClick={() => setPage(p => p - 1)}
+                        onClick={() => handlePageChange(page - 1)}
                         className="p-2 rounded-lg hover:bg-primary-orange/20 disabled:opacity-50 text-white"
                     >
                         <ChevronLeft className="h-5 w-5" />
@@ -205,7 +210,7 @@ export default function ItemExplorer() {
                                 return (
                                     <button
                                         key={i}
-                                        onClick={() => setPage(i)}
+                                        onClick={() => handlePageChange(i)}
                                         className={`w-10 h-10 rounded-lg font-medium transition-all ${page === i ? 'bg-primary-orange text-white shadow-orange' : 'hover:bg-primary-orange/20 text-text-secondary hover:text-white'}`}
                                     >
                                         {i + 1}
@@ -221,7 +226,7 @@ export default function ItemExplorer() {
 
                     <button
                         disabled={page === totalPages - 1}
-                        onClick={() => setPage(p => p + 1)}
+                        onClick={() => handlePageChange(page + 1)}
                         className="p-2 rounded-lg hover:bg-primary-orange/20 disabled:opacity-50 text-white"
                     >
                         <ChevronRight className="h-5 w-5" />
