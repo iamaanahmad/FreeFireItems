@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       { url: "https://www.freefirecommunity.com/wp-content/uploads/2025/06/cropped-FFCRefinedFavicon-1.png", sizes: "180x180" },
     ],
   },
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({

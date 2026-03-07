@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
     "clsx": "^2.1.1",
     "framer-motion": "^12.35.0",
     "lucide-react": "^0.577.0",

@@ -1,0 +1,22 @@
+{
+    "name": "Arsenal Free Fire Items Database",
+    "short_name": "Arsenal FFC",
+    "description": "Explore the complete Free Fire items database with Lightning Fast Search.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#ff6b35",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://www.freefirecommunity.com/wp-content/uploads/2025/06/cropped-FFCRefinedFavicon-1.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://www.freefirecommunity.com/wp-content/uploads/2025/06/cropped-FFCRefinedFavicon-1.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

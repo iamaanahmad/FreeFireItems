@@ -15,7 +15,7 @@ export default function Home() {
             className="w-10 h-10 rounded-xl object-contain group-hover:scale-110 transition-transform shadow-orange"
           />
           <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70 tracking-tight">
-            Arsenal <span className="hidden sm:inline font-normal text-text-secondary line-through opacity-50 ml-2 text-lg">by Free Fire Community</span>
+            Arsenal <span className="hidden sm:inline font-normal text-text-secondary ml-2 text-lg">by Free Fire Community</span>
           </h1>
         </div>
 
