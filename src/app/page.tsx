@@ -24,7 +24,7 @@ export default function Home() {
           <a href="#" className="text-sm font-semibold text-text-secondary hover:text-primary-orange transition-colors">Database</a>
           <a href="#" className="text-sm font-semibold text-text-secondary hover:text-primary-orange transition-colors">Weapons</a>
           <a href="#" className="text-sm font-semibold text-text-secondary hover:text-primary-orange transition-colors">Characters</a>
-          <a href="#" className="px-5 py-2 rounded-full bg-primary-orange/10 border border-primary-orange/30 text-primary-orange font-semibold hover:bg-primary-orange hover:text-white hover:shadow-orange transition-all duration-300">
+          <a href="https://discord.com/invite/free-fire-community-1025382753790865508" target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-primary-orange/10 border border-primary-orange/30 text-primary-orange font-semibold hover:bg-primary-orange hover:text-white hover:shadow-orange transition-all duration-300">
             Join Discord
           </a>
         </nav>
@@ -82,9 +82,47 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-card-border/50 py-8 px-6 text-center text-sm text-text-muted bg-black mt-auto">
-        <p className="mb-2">&copy; {new Date().getFullYear()} <span className="text-primary-orange">Arsenal - Free Fire Community</span>. All rights reserved.</p>
-        <p className="max-w-xl mx-auto opacity-60">Item data sourced from Garena Free Fire. This site is not affiliated with Garena International. Free Fire is a trademark of Garena International.</p>
+      <footer className="border-t border-card-border/50 py-12 px-6 bg-black mt-auto">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 text-left">
+
+          {/* Brand & Socials */}
+          <div className="space-y-4">
+            <h4 className="text-white font-bold text-lg mb-2">Free Fire Community</h4>
+            <p className="text-text-muted text-sm leading-relaxed max-w-sm">The ultimate source for Free Fire news, items, esports updates, and community engagement globally.</p>
+
+            <div className="flex gap-4 pt-2 text-text-muted text-sm underline-offset-4 underline flex-wrap">
+              <a href="https://twitter.com/FreeFireInt" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">X (Twitter)</a>
+              <a href="https://www.instagram.com/ff.communityofficial/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Instagram</a>
+              <a href="https://www.facebook.com/freefireint/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Facebook</a>
+              <a href="https://discord.com/invite/free-fire-community-1025382753790865508" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Discord</a>
+              <a href="https://www.linkedin.com/company/free-fire-community/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">LinkedIn</a>
+              <a href="https://www.reddit.com/r/Free_Fire_Community/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Reddit</a>
+            </div>
+          </div>
+
+          {/* Platforms */}
+          <div className="lg:ml-auto">
+            <h4 className="text-white font-bold text-lg mb-4">Official Platforms</h4>
+            <ul className="space-y-3 text-sm text-text-muted">
+              <li><a href="https://www.freefirecommunity.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Community Website</a></li>
+              <li><a href="https://redeemhub.freefirecommunity.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Redeem Hub</a></li>
+              <li><a href="https://developers.freefirecommunity.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Developer Platform</a></li>
+              <li><a href="https://esports.freefirecommunity.com/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">Esports Platform</a></li>
+            </ul>
+          </div>
+
+          <div className="lg:ml-auto">
+            <h4 className="text-white font-bold text-lg mb-4">Resources</h4>
+            <ul className="space-y-3 text-sm text-text-muted">
+              <li><a href="https://linktr.ee/FreeFireInt" target="_blank" rel="noopener noreferrer" className="hover:text-primary-orange transition-colors">LinkTree</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-card-border/50 pt-8 text-center text-sm text-text-muted">
+          <p className="mb-2">&copy; {new Date().getFullYear()} <span className="text-primary-orange">Arsenal - Free Fire Community</span>. All rights reserved.</p>
+          <p className="max-w-xl mx-auto opacity-60">Item data sourced from Garena Free Fire. This site is not affiliated with Garena International. Free Fire is a trademark of Garena International.</p>
+        </div>
       </footer>
 
       {/* Initialize AdSense script on mount */}
